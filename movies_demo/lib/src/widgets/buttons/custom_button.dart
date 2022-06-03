@@ -15,9 +15,10 @@ class CustomButton extends StatelessWidget {
   final double padVertical;
   final double padHorizontal;
   final Color borderColor;
-  final Function? btnFunction;
+  final void Function()? btnFunction;
 
-  CustomButton({
+  const CustomButton({
+    Key? key,
     required this.childWidget,
     this.height = 40.0,
     this.width,
@@ -29,7 +30,7 @@ class CustomButton extends StatelessWidget {
     this.padVertical = 0.0,
     this.padHorizontal = 0.0,
     required this.btnFunction
-  });
+  }): super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,6 @@ class CustomButton extends StatelessWidget {
           horizontal: padHorizontal
         ),
         disabledColor: Colors.grey.withOpacity(0.9),
-        height: height,
         color: (bgColor != null)
         ? bgColor : Colors.transparent,
         elevation: elevation,
@@ -55,7 +55,7 @@ class CustomButton extends StatelessWidget {
           side: BorderSide(color: borderColor)
         ),
         child: Center(child: childWidget),
-        onPressed: btnFunction!()
+        onPressed: btnFunction
       )
     );
   }

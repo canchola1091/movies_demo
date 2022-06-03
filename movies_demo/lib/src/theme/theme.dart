@@ -3,23 +3,23 @@
 import 'package:flutter/material.dart';
 import 'package:movies_demo/src/utils/utils.dart' as utils;
 
-// final ThemeData theme = ThemeData.dark().copyWith(
-//   scaffoldBackgroundColor: Colors.white,
-//   appBarTheme: AppBarTheme(color: primaryColor),
-//   // accentColor: secondaryColor,
-//   hintColor: subTitleColor,
-//   disabledColor: subTitleColor,
-//   unselectedWidgetColor: secondaryColor,
-//   // textSelectionColor: secondaryColor.withOpacity(0.7),
-//   // textSelectionHandleColor: primaryColor,
-//   textSelectionTheme: TextSelectionThemeData(
-//     selectionColor: secondaryColor.withOpacity(0.7),
-//     selectionHandleColor: primaryColor,
-//   ),
-// );
+final ThemeData theme = ThemeData.dark().copyWith(
+  scaffoldBackgroundColor: Colors.white,
+  appBarTheme: AppBarTheme(color: primaryColor),
+  // accentColor: secondaryColor,
+  hintColor: subTitleColor,
+  disabledColor: subTitleColor,
+  unselectedWidgetColor: secondaryColor,
+  // textSelectionColor: secondaryColor.withOpacity(0.7),
+  // textSelectionHandleColor: primaryColor,
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: secondaryColor.withOpacity(0.7),
+    selectionHandleColor: primaryColor,
+  ),
+);
 
 // final ThemeData theme = ThemeData.dark();
-final ThemeData theme = ThemeData.light();
+// final ThemeData theme = ThemeData.light();
 
 final Color primaryColor = utils.hexToColor('#022E92');
 

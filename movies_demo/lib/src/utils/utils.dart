@@ -4,6 +4,9 @@ import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
 
 // GlobalPreferences _globalPreferences = GlobalPreferences();
+  const String accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzAzZjIwMzI0YmQ4NWU4Nzg5MWZmNzg3NDgzOGIyZSIsInN1YiI6IjVkMWU2N2E3OTRkOGE4MzExNjQwMTY3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dzRcIdteaT0YitIkVrxzVpUBP6ULU_BgHUZkLj4L80A'; 
+  const String keyApi = '8703f20324bd85e87891ff7874838b2e';
+  const String urlImg = 'https://image.tmdb.org/t/p/original';
 
 //==========================================================
 /// DEVUELVE PORCIENTO DE ANCHO DE LA PANTALLA
@@ -109,6 +112,14 @@ void msgerror( msg ) => print('🛑 '+ msg.toString() + ' 🛑');
 //   requestHeaders['Authorization'] = "Token " + (_globalPreferences.usuarioToken!);
 //   return requestHeaders;
 // }
+
+Map<String, String> getHeaderwithUserToken() {
+    Map<String, String> requestHeaders = {
+      "Accept": "application/json",
+      "Authorization": "Bearer " + accessToken
+    };
+    return requestHeaders;
+  }
 
 
 Future<dynamic> cLoading() {

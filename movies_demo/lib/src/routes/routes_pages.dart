@@ -6,7 +6,7 @@ import 'package:movies_demo/src/pages/movies_page.dart';
 
 class RoutesPages {
   static List<GetPage> routes = [
-    GetPage(name: '/login_page',  page: () => LoginPage()),
-    GetPage(name: '/movies_page', page: () => MoviesPage()),
+    GetPage(name: '/login_page',  page: () => const LoginPage()),
+    GetPage(name: '/movies_page', page: () => const MoviesPage()),
   ];
 }

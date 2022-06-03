@@ -15,6 +15,7 @@ class CustomText extends StatelessWidget {
   final double spacingLetter;
 
   const CustomText({
+    Key? key,
     required this.fTxt,
     required this.fSize,
     this.fFamily = 'Monserrat-Medium',
@@ -25,29 +26,29 @@ class CustomText extends StatelessWidget {
     this.fFontStyle = FontStyle.normal,
     this.txtLine = TextDecoration.none,
     this.spacingLetter = 0.0
-  });
+  }): super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      this.fTxt,
-      textAlign: this.fAlign,
-      maxLines: this.fMaxLines,
-      overflow: (this.fMaxLines == null) ? null : TextOverflow.ellipsis,
+      fTxt,
+      textAlign: fAlign,
+      maxLines: fMaxLines,
+      overflow: (fMaxLines == null) ? null : TextOverflow.ellipsis,
       style: TextStyle(
-        fontSize: this.fSize,
-        fontFamily: this.fFamily,
-        color: this.fColor,
+        fontSize: fSize,
+        fontFamily: fFamily,
+        color: fColor,
         fontWeight: (fWeight == null) ? null
-        : getFontWeight(this.fWeight!),
-        fontStyle: this.fFontStyle,
-        decoration: this.txtLine,
-        letterSpacing: this.spacingLetter
+        : getFontWeight(fWeight!),
+        fontStyle: fFontStyle,
+        decoration: txtLine,
+        letterSpacing: spacingLetter
       )
     );
   }
 
-  FontWeight getFontWeight(String _weight) {
+  FontWeight getFontWeight(String _weight) { // TODO: Remover
     switch (_weight) {
       case 'Thin':
         return FontWeight.w100;

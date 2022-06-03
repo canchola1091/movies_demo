@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:movies_demo/src/theme/theme.dart' as th;
 
-class CTextField extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
+
+  // TODO: Perzonalizar y borrar variables que no se usan
 
   final String textLabel;
   final String textHint;
@@ -28,7 +30,8 @@ class CTextField extends StatelessWidget {
   final void Function()? onClick;
   final void Function(String)? onChanged;
 
-  CTextField({
+  const CustomTextField({
+    Key? key,
     required this.textLabel,
     this.textHint = '',
     this.borderField = 5.0,
@@ -51,90 +54,90 @@ class CTextField extends StatelessWidget {
     this.validation,
     this.onClick,
     this.onChanged
-  });
+  }): super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      inputFormatters: (!this.containsFormat)
+      inputFormatters: (!containsFormat)
       ? []
       : [
         FilteringTextInputFormatter.deny(RegExp('[a-zA-Z]')),
-        LengthLimitingTextInputFormatter(this.maxCaracteres),
+        LengthLimitingTextInputFormatter(maxCaracteres),
       ],
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      keyboardType: this.typeKeyboard,
-      textCapitalization: this.capitalization,
-      obscureText: this.hideText,
+      keyboardType: typeKeyboard,
+      textCapitalization: capitalization,
+      obscureText: hideText,
       focusNode: fieldNode,
-      controller: this.fieldController,
-      validator: this.validation,
-      enabled: this.isEnabled,
-      readOnly: (this.isOnclick) ? true : false,
+      controller: fieldController,
+      validator: validation,
+      enabled: isEnabled,
+      readOnly: (isOnclick) ? true : false,
       onTap: () {
-        if (this.isOnclick) this.onClick!();
+        if (isOnclick) onClick!();
       },
       cursorColor: th.primaryColor,
       decoration: InputDecoration(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(this.borderField),
+          borderRadius: BorderRadius.circular(borderField),
           borderSide: BorderSide(color: th.primaryColor, width: 2.0),
         ),
         enabledBorder:  OutlineInputBorder(
-          borderRadius: BorderRadius.circular(this.borderField),
+          borderRadius: BorderRadius.circular(borderField),
           borderSide: BorderSide(
-            color: (this.hasBorder)
-            ? (this.hasError) ? th.errorColor : th.subTitleColor
+            color: (hasBorder)
+            ? (hasError) ? th.errorColor : th.subTitleColor
             : Colors.transparent,
-            width: (this.hasError) ? 2.0 : 1.0
+            width: (hasError) ? 2.0 : 1.0
           ),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(this.borderField),
-          borderSide: BorderSide(color: (this.hasBorder) ? th.subTitleColor.withOpacity(0.25) : Colors.transparent, width: 2.0)
+          borderRadius: BorderRadius.circular(borderField),
+          borderSide: BorderSide(color: (hasBorder) ? th.subTitleColor.withOpacity(0.25) : Colors.transparent, width: 2.0)
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(this.borderField),
-          borderSide: BorderSide(color: (this.hasBorder) ? th.errorColor : Colors.transparent, width: 2.0)
+          borderRadius: BorderRadius.circular(borderField),
+          borderSide: BorderSide(color: (hasBorder) ? th.errorColor : Colors.transparent, width: 2.0)
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(this.borderField),
+          borderRadius: BorderRadius.circular(borderField),
           borderSide: BorderSide(
-            color: (this.hasBorder)
-            ? (this.hasError) ? th.errorColor : th.secondaryColor
+            color: (hasBorder)
+            ? (hasError) ? th.errorColor : th.secondaryColor
             : Colors.transparent, width: 2.0
           ),
         ),
         filled: true,
         fillColor: Colors.white,
-        labelText: this.textLabel,
+        labelText: textLabel,
         labelStyle: TextStyle(
           fontFamily: 'Monserrat-Regular',
-          color: (this.hasError) ? th.errorColor : null
+          color: (hasError) ? th.errorColor : null
         ),
         errorStyle:  TextStyle(
           fontFamily: 'Monserrat-Regular',
           color: th.errorColor
         ),
         errorMaxLines: 3,
-        hintText: this.textHint,
+        hintText: textHint,
         hintStyle: TextStyle(
           color: th.subTitleColor,
           fontWeight: FontWeight.w500
         ),
-        prefixIcon: (this.iconPrefix != null)
-        ? Icon(this.iconPrefix, color: th.secondaryColor) : null,
-        suffixIcon: this.iconSuffix,
-        counterText: (this.hasCounter) ? '${this.fieldController.text.length} / ${this.maxCaracteres}' : '',
-        counterStyle: TextStyle(
+        prefixIcon: (iconPrefix != null)
+        ? Icon(iconPrefix, color: th.secondaryColor) : null,
+        suffixIcon: iconSuffix,
+        counterText: (hasCounter) ? '${fieldController.text.length} / $maxCaracteres' : '',
+        counterStyle: const TextStyle(
           fontSize: 11.0,
           color: Colors.grey
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always
       ),
-      maxLength: this.maxCaracteres,
-      maxLines: (this.isExpanded) ? null : 1,
-      textAlign: this.txtAlign,
+      maxLength: maxCaracteres,
+      maxLines: (isExpanded) ? null : 1,
+      textAlign: txtAlign,
       onChanged: onChanged,
       style: TextStyle(
         fontFamily: 'Monserrat-Regular',
