@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:movies_demo/src/routes/routes_pages.dart';
 import 'package:movies_demo/src/theme/theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +21,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Movies Demo',
       theme: theme,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('es'), // Spanish
+      ],
+      locale: const Locale('es', 'ES'),
       initialRoute: '/login_page',
       getPages: RoutesPages.routes,
     );

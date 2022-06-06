@@ -1,29 +1,20 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:movies_demo/src/theme/theme.dart' as th;
 
 class CustomTextField extends StatelessWidget {
-
-  // TODO: Perzonalizar y borrar variables que no se usan
 
   final String textLabel;
   final String textHint;
   final double borderField;
   final bool hideText;
-  final bool isEnabled;
-  final bool isOnclick;
   final bool hasBorder;
   final bool hasError;
-  final bool hasCounter;
   final TextInputType typeKeyboard;
   final TextCapitalization capitalization;
-  final FocusNode? fieldNode;
   final TextEditingController fieldController;
   final IconData? iconPrefix;
   final Widget? iconSuffix;
-  final bool isExpanded;
-  final bool containsFormat;
   final int? maxCaracteres;
   final TextAlign txtAlign;
   final String? Function(String?)? validation;
@@ -33,22 +24,16 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
     required this.textLabel,
-    this.textHint = '',
-    this.borderField = 5.0,
-    this.hideText = false,
-    this.isEnabled = true,
-    this.isOnclick = false,
-    this.hasBorder = true,
-    this.hasError = false,
-    this.hasCounter = false,
-    this.typeKeyboard = TextInputType.text,
+    this.textHint       = '',
+    this.borderField    = 5.0,
+    this.hideText       = false,
+    this.hasBorder      = true,
+    this.hasError       = false,
+    this.typeKeyboard   = TextInputType.text,
     this.capitalization = TextCapitalization.none,
-    this.fieldNode,
     required this.fieldController,
     this.iconPrefix,
     this.iconSuffix,
-    this.isExpanded = false,
-    this.containsFormat = false,
     this.maxCaracteres,
     this.txtAlign = TextAlign.left,
     this.validation,
@@ -59,24 +44,12 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      inputFormatters: (!containsFormat)
-      ? []
-      : [
-        FilteringTextInputFormatter.deny(RegExp('[a-zA-Z]')),
-        LengthLimitingTextInputFormatter(maxCaracteres),
-      ],
       autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: typeKeyboard,
       textCapitalization: capitalization,
       obscureText: hideText,
-      focusNode: fieldNode,
       controller: fieldController,
       validator: validation,
-      enabled: isEnabled,
-      readOnly: (isOnclick) ? true : false,
-      onTap: () {
-        if (isOnclick) onClick!();
-      },
       cursorColor: th.primaryColor,
       decoration: InputDecoration(
         border: OutlineInputBorder(
@@ -104,7 +77,7 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderField),
           borderSide: BorderSide(
             color: (hasBorder)
-            ? (hasError) ? th.errorColor : th.secondaryColor
+            ? (hasError) ? th.errorColor : th.primaryColor
             : Colors.transparent, width: 2.0
           ),
         ),
@@ -126,9 +99,9 @@ class CustomTextField extends StatelessWidget {
           fontWeight: FontWeight.w500
         ),
         prefixIcon: (iconPrefix != null)
-        ? Icon(iconPrefix, color: th.secondaryColor) : null,
+        ? Icon(iconPrefix, color: th.secondaryColor)
+        : null,
         suffixIcon: iconSuffix,
-        counterText: (hasCounter) ? '${fieldController.text.length} / $maxCaracteres' : '',
         counterStyle: const TextStyle(
           fontSize: 11.0,
           color: Colors.grey
@@ -136,13 +109,9 @@ class CustomTextField extends StatelessWidget {
         floatingLabelBehavior: FloatingLabelBehavior.always
       ),
       maxLength: maxCaracteres,
-      maxLines: (isExpanded) ? null : 1,
       textAlign: txtAlign,
       onChanged: onChanged,
-      style: TextStyle(
-        fontFamily: 'Monserrat-Regular',
-        color: th.subTitleColor
-      )
+      style: TextStyle( color: th.subTitleColor )
     );
   }
 }

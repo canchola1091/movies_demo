@@ -48,7 +48,7 @@ class CustomText extends StatelessWidget {
     );
   }
 
-  FontWeight getFontWeight(String _weight) { // TODO: Remover
+  FontWeight getFontWeight(String _weight) {
     switch (_weight) {
       case 'Thin':
         return FontWeight.w100;
@@ -69,9 +69,6 @@ class CustomText extends StatelessWidget {
       case 'Black':
         return FontWeight.w900;
       default:
-        print('================================');
-        print('== E R R O R  EN  F U E N T E ==');
-        print('================================');
         return FontWeight.w900;
     }
   }

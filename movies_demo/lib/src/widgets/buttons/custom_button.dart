@@ -37,6 +37,7 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       width: (width == null) ? null : utils.porcientoW(Get.context, width!),
       child: MaterialButton(
+        height: height,
         padding: EdgeInsets.symmetric(
           vertical: padVertical,
           horizontal: padHorizontal

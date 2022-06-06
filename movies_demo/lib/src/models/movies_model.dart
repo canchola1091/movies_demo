@@ -13,7 +13,7 @@ class MoviesModel {
   List<Movie> results;
 
   MoviesModel({
-      required this.results,
+    required this.results,
   });
 
   factory MoviesModel.fromJson(Map<String, dynamic> json) => MoviesModel(
@@ -49,8 +49,6 @@ class Movie {
     required this.title,
     required this.voteAverage,
   });
-
-    
 
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
     backdropPath:  json["backdrop_path"],

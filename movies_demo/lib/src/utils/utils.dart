@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
-// GlobalPreferences _globalPreferences = GlobalPreferences();
-  const String accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzAzZjIwMzI0YmQ4NWU4Nzg5MWZmNzg3NDgzOGIyZSIsInN1YiI6IjVkMWU2N2E3OTRkOGE4MzExNjQwMTY3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dzRcIdteaT0YitIkVrxzVpUBP6ULU_BgHUZkLj4L80A'; 
-  const String keyApi = '8703f20324bd85e87891ff7874838b2e';
-  const String urlImg = 'https://image.tmdb.org/t/p/original';
+
+const String accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzAzZjIwMzI0YmQ4NWU4Nzg5MWZmNzg3NDgzOGIyZSIsInN1YiI6IjVkMWU2N2E3OTRkOGE4MzExNjQwMTY3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dzRcIdteaT0YitIkVrxzVpUBP6ULU_BgHUZkLj4L80A'; 
+const String keyApi = '8703f20324bd85e87891ff7874838b2e';
 
 //==========================================================
 /// DEVUELVE PORCIENTO DE ANCHO DE LA PANTALLA
@@ -53,7 +53,7 @@ bool validarEmail(String _email) {
 //==========================================================
 bool validateLetterUpperCase(String value){
   String  pattern = r'[A-Z]';
-  RegExp regExp = new RegExp(pattern);
+  RegExp regExp = RegExp(pattern);
   return regExp.hasMatch(value);
 }
 
@@ -103,17 +103,7 @@ void msgerror( msg ) => print('🛑 '+ msg.toString() + ' 🛑');
 //==========================================================
 /// HEADER WHIT TOKEN
 //==========================================================
-// Map<String,String> getHeaders([bool _withToken = true]){
-//   Map<String, String>  requestHeaders = {
-//     "Accept": "application/json",
-//     "content-type": "application/json; charset=utf-8",
-//   };
-//   if (_globalPreferences.usuarioToken != '' && _withToken)
-//   requestHeaders['Authorization'] = "Token " + (_globalPreferences.usuarioToken!);
-//   return requestHeaders;
-// }
-
-Map<String, String> getHeaderwithUserToken() {
+Map<String, String> getHeaderWithToken() {
     Map<String, String> requestHeaders = {
       "Accept": "application/json",
       "Authorization": "Bearer " + accessToken
@@ -121,7 +111,9 @@ Map<String, String> getHeaderwithUserToken() {
     return requestHeaders;
   }
 
-
+//==========================================================
+/// LOADING QUE SE MUESTRA AL CONSUMIR ENDPOINTS
+//==========================================================
 Future<dynamic> cLoading() {
   return Get.dialog(
     WillPopScope(
@@ -135,3 +127,15 @@ Future<dynamic> cLoading() {
   );
 }
 
+
+//==========================================================
+/// FORMATO PARA LA FECHA, DEVUELVE => Mes dd, yy
+//==========================================================
+String dateFormat(DateTime _dateTime) {
+  String _dateStrFormat;
+  _dateStrFormat = (DateFormat('MMMM', 'es_ES').format(_dateTime)).substring(0,1).toUpperCase();
+  _dateStrFormat += (DateFormat('MMMM', 'es_ES').format(_dateTime)).substring(1)+' ';
+  _dateStrFormat += DateFormat('d', 'es_ES').format(_dateTime)+', ';
+  _dateStrFormat += DateFormat('y', 'es_ES').format(_dateTime);
+  return _dateStrFormat;
+}

@@ -1,9 +1,12 @@
+
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/route_manager.dart';
 import 'package:movies_demo/src/controllers/movies_controller.dart';
-import 'package:movies_demo/src/pages/detail_movie.dart';
+import 'package:movies_demo/src/widgets/movies/grid/grid_movies.dart';
+import 'package:movies_demo/src/widgets/movies/list/list_movies.dart';
 import 'package:movies_demo/src/widgets/text/custom_text.dart';
+import 'package:movies_demo/src/theme/theme.dart' as th;
 
 
 class MoviesPage extends StatelessWidget {
@@ -13,7 +16,7 @@ class MoviesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<MoviesController>(
       init: MoviesController(),
-      id: 'movies',
+      id: 'list-movies',
       builder: (_) => Scaffold(
         appBar: AppBar(
           title: const CustomText(
@@ -24,35 +27,40 @@ class MoviesPage extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.exit_to_app),
-              onPressed: _.fnLogOut
+              onPressed: _.showAlertLogOut
             )
-          ],
+          ]
         ),
-        body: (!_.loadingMovies)
-        ? ListView.builder(
-          itemCount: _.moviesModel!.results.length,
-          itemBuilder: (__, int index) {
-            return GestureDetector(
-              onTap: () => Get.to( () => DetailsMoviePage(movie: _.moviesModel!.results[index])),
-              child: Container(
-                width: 30.0,
-                height: 50.0,
-                margin: const EdgeInsets.all(15.0),
-                color: Colors.blue,
-                child: Center(
-                  child: CustomText(
-                    fTxt: _.moviesModel!.results[index].originalTitle,
-                    fSize: 16.0,
-                  ),
-                ),
-              ),
-            );
-          }
-        ) : const Center(child: CircularProgressIndicator()),
-       floatingActionButton: FloatingActionButton(
-         onPressed: _.getMovies
-       ),
-       ),
+        body: (_.gxLoadingMovies)
+          ? const Center(child: CircularProgressIndicator())
+          : _typeView(_.gxIsGridView), 
+       floatingActionButton: Bounce(
+         from: 20.0,
+         child: FloatingActionButton(
+           child: const Icon(Icons.compare_arrows_outlined, color: Colors.white),
+           backgroundColor: th.primaryColor,
+           onPressed: _.changeView,
+         )
+       )
+      )
+    );
+  }
+
+  Widget _typeView(bool _isGridView) {
+    return  AnimatedSwitcher(
+      duration: const Duration(milliseconds: 800),
+      transitionBuilder: (child, animation) => SlideTransition(
+        position: animation.drive(
+          Tween(
+            begin: const Offset(1.0, 0.0),
+            end: const Offset(0.0, 0.0)
+          )
+        ),
+        child: child
+      ),
+      child: (_isGridView)
+        ? const GridMovies()
+        : const ListMovies() 
     );
   }
 }
